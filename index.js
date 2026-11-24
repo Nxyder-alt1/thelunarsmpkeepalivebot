@@ -1,6 +1,7 @@
-// index.js — ultra-light keepalive bot voor theempiresmp (met automatische reconnect)
+// index.js — ultra-light keepalive bot + Express /ping endpoint
 
 const mineflayer = require('mineflayer');
+const express = require('express');
 
 // ============================================
 // CONFIG
@@ -13,14 +14,14 @@ const BOT_CONFIG = {
   hideInventory: true,
 };
 
-const PASSWORD = '<passKeepAliveBot>'; // <-- VERVANG DIT
+const PASSWORD = '<passKeepAliveBot>'; // <-- VERVANG DIT MET JE WACHTWOORD
 
 let bot = null;
 let reconnectTimer = null;
 let isConnecting = false;
 
 // ============================================
-// CRASH-BEVEILIGING
+// CRASH-BEVEILIGING (Nooit process.exit)
 // ============================================
 process.on('uncaughtException', (err) => {
   const msg = (err && err.message) || '';
@@ -107,7 +108,7 @@ function startBot() {
 }
 
 // ============================================
-# RECONNECT HELPER
+// RECONNECT HELPER
 // ============================================
 function cleanupAndReconnect(reason) {
   isConnecting = false;
@@ -132,5 +133,25 @@ function scheduleReconnect(reason) {
   }, 5000);
 }
 
-// Eerste start
+// ============================================
+// EXPRESS API SERVER (/ping)
+// ============================================
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/ping', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.get('/', (req, res) => {
+  res.status(200).send(bot && bot.player ? 'Bot is online' : 'Bot is aan het verbinden/offline');
+});
+
+app.listen(PORT, () => {
+  console.log(`[HTTP] API Server draait op poort ${PORT}`);
+});
+
+// ============================================
+// START DE BOT
+// ============================================
 startBot();
