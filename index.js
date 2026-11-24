@@ -7,9 +7,9 @@ const express = require('express');
 // CONFIG
 // ============================================
 const BOT_CONFIG = {
-  host: 'theempiresmp.play.hosting',
+  host: 'the-lunar-smp.play.hosting',
   port: 25565,
-  username: 'Thekiddo_Bot',
+  username: 'KeepAliveBot',
   version: '1.21.1',
   hideInventory: true,
 };
