@@ -1,5 +1,5 @@
 {
-  "name": "thekiddo-keepalive",
+  "name": "theempiresmp-keepalive",
   "version": "1.0.0",
   "description": "Ultra-light keepalive bot voor theempiresmp",
   "main": "index.js",
@@ -7,6 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "express": "^4.19.2",
     "mineflayer": "^4.23.0"
   },
   "engines": {
