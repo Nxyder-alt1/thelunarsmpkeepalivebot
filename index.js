@@ -9,7 +9,7 @@ const express = require('express');
 const BOT_CONFIG = {
   host: 'the-lunar-smp.play.hosting',
   port: 25565,
-  username: 'KeepAliveBot',
+  username: 'Lunar_Bot',
   version: '1.21.1',
   hideInventory: true,
 };
